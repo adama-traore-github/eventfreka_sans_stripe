@@ -1,0 +1,35 @@
+psql -U postgres
+
+
+#Réinitialiser la base de données 
+rails db:drop
+rails db:create
+rails db:migrate
+rails db:seed
+
+#Ouvrir la console Rails 
+rails console
+
+#Ensuite, consulte les données existantes 
+User.all
+Event.all
+Attendance.all
+
+#Créer un nouvel utilisateur admin : Assure-toi de définir le rôle avant de créer l'utilisateur administrateur, car cela influence l'affichage du bouton admin dans la barre de navigation. Crée l'utilisateur admin en utilisant
+user = User.find_by(email: 'a@gmail.com')
+user.update(role: 'admin')
+
+AdminUser.create!(
+  email: 'a@gmail.com',
+  password: '&&&&&&',
+  password_confirmation: '&&&&&&'
+)
+
+AdminUser.create!(
+  email: 'c@gmail.com',
+  password: 'aaaaaa',
+  password_confirmation: 'aaaaaa'
+)
+
+Note que la création d’un admin permet l'accès au tableau de bord admin, mais si le rôle n'est pas défini correctement avant, le bouton admin dans la barre de navigation ne sera pas visible, même si l'admin est créé.
+

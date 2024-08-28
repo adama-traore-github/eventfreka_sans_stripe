@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Rejoindre l'Événement</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  </head>
+
+  <body>
+    <div class="container mt-5">
+      <h1>Rejoindre l'Événement : <%= @event.title %></h1>
+      <p><strong>Description :</strong> <%= @event.description %></p>
+      <p><strong>Prix :</strong> <%= @event.price %> €</p>
+
+      <% if @event.price > 0 %>
+        <!-- Affiche le message indiquant que l'événement est payant et que l'utilisateur sera redirigé vers la page de paiement -->
+        <p>Pour rejoindre cet événement payant, veuillez procéder au paiement en suivant le lien ci-dessous.</p>
+        <%= link_to 'Payer et rejoindre cet événement', join_event_path(@event), class: 'btn btn-success' %>
+      <% else %>
+        <!-- Affiche le bouton pour rejoindre l'événement gratuitement -->
+        <%= form_tag join_event_path(@event), method: :post do %>
+          <%= submit_tag 'Rejoindre cet événement', class: 'btn btn-success' %>
+        <% end %>
+      <% end %>
+    </div>
+  </body>
+</html>
